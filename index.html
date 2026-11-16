@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sue Kim — Information Technology Student</title>
+    <meta
+      name="description"
+      content="Sue Kim's portfolio: information technology, networking, databases, and web technologies."
+    />
+
+    <!-- Tailwind Play CDN: convenient for a standalone example -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #0b0c10;
+        --paper: #efede7;
+        --blue: #78a5ff;
+        --orange: #f4a17e;
+        --muted: #a2a2aa;
+        --mono: "DM Mono", monospace;
+        --display: "Space Grotesk", sans-serif;
+        --body: "Manrope", sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 84px;
+      }
+
+      body {
+        margin: 0;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: var(--body);
+      }
+
+      .site {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        background:
+          radial-gradient(ellipse at 82% 4%, rgba(36, 100, 222, 0.14), transparent 34%),
+          radial-gradient(ellipse at 5% 46%, rgba(236, 133, 92, 0.08), transparent 32%),
+          var(--ink);
+      }
+
+      /* Subtle grid and grain sit behind the page content. */
+      .site::before,
+      .site::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .site::before {
+        z-index: -1;
+        background-image:
+          linear-gradient(rgba(165, 185, 224, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(165, 185, 224, 0.07) 1px, transparent 1px);
+        background-size: 48px 48px;
+        opacity: 0.42;
+        mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.55) 58%, transparent);
+      }
+
+      .site::after {
+        z-index: 20;
+        opacity: 0.1;
+        mix-blend-mode: soft-light;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+      }
+
+      .font-display {
+        font-family: var(--display);
+      }
+
+      .font-mono {
+        font-family: var(--mono);
+      }
+
+      .hero {
+        position: relative;
+        isolation: isolate;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        inset: 12px -5vw;
+        pointer-events: none;
+        background:
+          radial-gradient(ellipse 42% 52% at 22% 36%, rgba(32, 112, 255, 0.4), transparent 74%),
+          radial-gradient(ellipse 42% 56% at 88% 88%, rgba(249, 151, 117, 0.4), transparent 76%),
+          radial-gradient(ellipse 28% 34% at 56% 24%, rgba(255, 255, 255, 0.2), transparent 72%);
+        mix-blend-mode: screen;
+      }
+
+      .terminal {
+        background: rgba(13, 22, 39, 0.88);
+        box-shadow:
+          0 28px 90px rgba(0, 0, 0, 0.36),
+          0 0 60px rgba(41, 101, 208, 0.12);
+      }
+
+      .project-art {
+        position: relative;
+        isolation: isolate;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+
+      .project-art::before {
+        content: "";
+        position: absolute;
+        width: 165px;
+        height: 165px;
+        border: 1px solid rgba(183, 205, 255, 0.24);
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 24px rgba(117, 161, 255, 0.045),
+          0 0 0 52px rgba(117, 161, 255, 0.025);
+      }
+
+      .project-network {
+        background:
+          radial-gradient(ellipse at 50% 50%, rgba(48, 116, 255, 0.34), transparent 54%),
+          #101521;
+      }
+
+      .project-database {
+        background:
+          radial-gradient(ellipse at 65% 68%, rgba(248, 145, 111, 0.3), transparent 48%),
+          #151218;
+      }
+
+      .project-web {
+        background:
+          radial-gradient(ellipse at 75% 80%, rgba(63, 127, 255, 0.3), transparent 48%),
+          #11141a;
+      }
+
+      .project-shape {
+        width: 108px;
+        height: 108px;
+        border: 1px solid rgba(152, 190, 255, 0.75);
+        border-radius: 28px;
+        transform: rotate(45deg);
+        box-shadow: 0 0 50px rgba(58, 121, 255, 0.22);
+      }
+
+      .project-database .project-shape {
+        border-color: rgba(255, 183, 153, 0.75);
+        border-radius: 50%;
+        transform: scaleX(0.78);
+        box-shadow: 0 0 45px rgba(248, 145, 111, 0.18);
+      }
+
+      .project-web .project-shape {
+        width: 150px;
+        height: 88px;
+        border-radius: 50%;
+        transform: rotate(-26deg);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="site min-h-screen">
+      <header class="sticky top-0 z-30 border-b border-white/10 bg-[#0b0c10]/85 backdrop-blur-xl">
+        <div class="mx-auto flex h-[68px] max-w-6xl items-center justify-between px-5 md:h-[76px]">
+          <a href="#home" class="flex items-center gap-2.5 font-extrabold tracking-tight" aria-label="Sue Kim, home">
+            <span class="grid h-[30px] w-[30px] place-items-center rounded-lg bg-gradient-to-br from-blue-300 to-blue-600 font-mono text-xs text-slate-950">&gt;_</span>
+            <span class="text-sm">sue.dev</span>
+          </a>
+
+          <button
+            id="menu-button"
+            class="rounded-lg border border-white/15 p-2 text-white md:hidden"
+            type="button"
+            aria-expanded="false"
+            aria-controls="site-nav"
+            aria-label="Open navigation menu"
+          >
+            ☰
+          </button>
+
+          <nav
+            id="site-nav"
+            class="absolute left-0 right-0 top-[67px] hidden flex-col border-b border-white/10 bg-[#0c0d12] px-5 py-4 md:static md:flex md:flex-row md:items-center md:gap-7 md:border-0 md:bg-transparent md:p-0"
+            aria-label="Main navigation"
+          >
+            <a class="py-3 text-sm text-slate-300 hover:text-blue-300 md:py-0" href="#home">Home</a>
+            <a class="py-3 text-sm text-slate-300 hover:text-blue-300 md:py-0" href="#about">About</a>
+            <a class="py-3 text-sm text-slate-300 hover:text-blue-300 md:py-0" href="#skills">Skills</a>
+            <a class="py-3 text-sm text-slate-300 hover:text-blue-300 md:py-0" href="#projects">Projects</a>
+            <a class="rounded-lg bg-[#f4a17e] px-4 py-3 text-center text-sm font-bold text-slate-950 hover:bg-orange-200 md:py-2.5" href="#contact">Resume / Let’s talk</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <section id="home" class="hero mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:min-h-[610px] md:grid-cols-2 md:gap-20 md:py-20">
+          <div>
+            <p class="mb-7 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-2 text-xs text-slate-300">
+              <span class="h-1.5 w-1.5 rounded-full bg-[#f4a17e]"></span>
+              Curious by design. Technical by nature.
+            </p>
+
+            <h1 class="font-display text-6xl font-semibold leading-none tracking-[-0.075em] text-[#f1eee8] md:text-8xl">
+              Sue Kim
+            </h1>
+
+            <p class="font-mono mt-5 text-sm text-blue-300">
+              <span class="text-[#f4a17e]">//</span> Information Technology Student
+            </p>
+
+            <p class="mt-6 max-w-xl text-sm leading-8 text-slate-400">
+              Undergraduate Information Technology student with experience in networking,
+              database systems, web technologies, and human-centered design. I enjoy solving
+              technical problems and creating secure, reliable, and user-friendly technology
+              solutions.
+            </p>
+
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-[#78a5ff] px-5 text-sm font-bold text-slate-950 hover:bg-blue-200" href="#projects">
+                Explore my work <span aria-hidden="true">↘</span>
+              </a>
+              <a class="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-blue-300/60 px-5 text-sm font-bold text-blue-200 hover:bg-blue-500/10" href="#contact">
+                A little about me <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Static terminal-style profile box -->
+          <div class="terminal w-full max-w-[440px] justify-self-center overflow-hidden rounded-2xl border border-blue-200/20 md:justify-self-end">
+            <div class="flex items-center justify-between border-b border-white/10 bg-white/[0.035] px-5 py-4">
+              <div class="flex gap-1.5" aria-hidden="true">
+                <span class="h-2 w-2 rounded-full bg-[#f4a17e]"></span>
+                <span class="h-2 w-2 rounded-full bg-blue-300"></span>
+                <span class="h-2 w-2 rounded-full bg-emerald-300"></span>
+              </div>
+              <span class="font-mono text-[10px] text-blue-100/60">sue_kim.profile</span>
+            </div>
+
+            <div class="font-mono space-y-4 px-5 py-5 text-[11px]">
+              <div class="flex justify-between gap-4 border-b border-white/[0.06] pb-3">
+                <span class="text-slate-500">role</span>
+                <span class="text-blue-200">undergraduate_student</span>
+              </div>
+              <div class="flex justify-between gap-4 border-b border-white/[0.06] pb-3">
+                <span class="text-slate-500">focus</span>
+                <span>people × technology</span>
+              </div>
+              <div class="flex justify-between gap-4 border-b border-white/[0.06] pb-3">
+                <span class="text-slate-500">approach</span>
+                <span>curious · considered</span>
+              </div>
+              <div>
+                <p class="mb-3 text-slate-500">areas_of_interest</p>
+                <div class="grid grid-cols-2 gap-2 text-slate-300">
+                  <span><b class="text-[#f4a17e]">›</b> networking</span>
+                  <span><b class="text-[#f4a17e]">›</b> database systems</span>
+                  <span><b class="text-[#f4a17e]">›</b> web technologies</span>
+                  <span><b class="text-[#f4a17e]">›</b> human-centered design</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="font-mono flex justify-between gap-3 border-t border-white/10 px-5 py-3 text-[9px] text-slate-500">
+              <span>status: learning_in_progress</span>
+              <span class="text-emerald-300">● open to possibilities</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="border-t border-white/10 py-20 md:py-28">
+          <div class="mx-auto max-w-6xl px-5">
+            <div class="grid gap-4 md:grid-cols-[180px_1fr]">
+              <p class="font-mono pt-2 text-xs text-[#f4a17e]">01 / THE PERSON</p>
+              <div>
+                <h2 class="font-display max-w-3xl text-4xl font-medium leading-tight tracking-tight md:text-6xl">
+                  Technology, with<br />people in the picture.
+                </h2>
+                <p class="mt-5 max-w-xl text-sm leading-7 text-slate-400">
+                  I’m interested in the systems underneath—and in whether the people using them can trust and understand them.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-12 grid gap-10 md:grid-cols-2 md:gap-16">
+              <p class="max-w-2xl text-sm leading-8 text-slate-400">
+                I’m Sue, an <strong class="text-[#efede7]">undergraduate Information Technology student</strong>
+                exploring how thoughtful engineering can make everyday technology more useful.
+                My studies bring together networks, data, web development, and the human decisions
+                that shape an experience.
+              </p>
+              <div class="divide-y divide-white/10 border-y border-white/10 text-xs">
+                <p class="flex justify-between gap-5 py-4"><span>01 / Start with questions</span><span class="text-slate-500">Understand the real need</span></p>
+                <p class="flex justify-between gap-5 py-4"><span>02 / Follow the system</span><span class="text-slate-500">Connect the moving parts</span></p>
+                <p class="flex justify-between gap-5 py-4"><span>03 / Make it usable</span><span class="text-slate-500">Keep people in view</span></p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="skills" class="border-t border-white/10 py-20 md:py-28">
+          <div class="mx-auto max-w-6xl px-5">
+            <div class="grid gap-4 md:grid-cols-[180px_1fr]">
+              <p class="font-mono pt-2 text-xs text-[#f4a17e]">02 / THE TOOLKIT</p>
+              <div>
+                <h2 class="font-display text-4xl font-medium leading-tight tracking-tight md:text-6xl">
+                  A connected<br />set of interests.
+                </h2>
+                <p class="mt-5 max-w-xl text-sm leading-7 text-slate-400">
+                  These are the areas I’m learning to bring together.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-12 grid gap-3 sm:grid-cols-2 md:ml-[200px]">
+              <article class="rounded-xl border border-white/10 bg-white/[0.02] p-6">
+                <h3 class="font-mono mb-4 text-xs text-blue-300">01 / INFRASTRUCTURE</h3>
+                <p class="text-sm text-slate-300">Networking · Network fundamentals · Systems thinking</p>
+              </article>
+              <article class="rounded-xl border border-white/10 bg-white/[0.02] p-6">
+                <h3 class="font-mono mb-4 text-xs text-[#f4a17e]">02 / INFORMATION</h3>
+                <p class="text-sm text-slate-300">Database systems · Data organization</p>
+              </article>
+              <article class="rounded-xl border border-white/10 bg-white/[0.02] p-6">
+                <h3 class="font-mono mb-4 text-xs text-blue-300">03 / THE WEB</h3>
+                <p class="text-sm text-slate-300">Web technologies · Web fundamentals</p>
+              </article>
+              <article class="rounded-xl border border-white/10 bg-white/[0.02] p-6">
+                <h3 class="font-mono mb-4 text-xs text-[#f4a17e]">04 / EXPERIENCE</h3>
+                <p class="text-sm text-slate-300">Human-centered design · Usability · Clear communication</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" class="border-t border-white/10 py-20 md:py-28">
+          <div class="mx-auto max-w-6xl px-5">
+            <div class="grid gap-4 md:grid-cols-[180px_1fr]">
+              <p class="font-mono pt-2 text-xs text-[#f4a17e]">03 / PROJECTS</p>
+              <div>
+                <h2 class="font-display text-4xl font-medium leading-tight tracking-tight md:text-6xl">
+                  Three spaces for<br />work worth sharing.
+                </h2>
+                <p class="mt-5 max-w-xl text-sm leading-7 text-slate-400">
+                  Add project details as they’re ready. These are placeholders, not examples of completed work.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-12 grid gap-4 md:grid-cols-3">
+              <article class="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
+                <div class="project-art project-network h-56"><span class="project-shape"></span></div>
+                <div class="p-5">
+                  <p class="font-mono flex justify-between text-[10px] text-blue-300"><span>NETWORKING</span><span>PROJECT 01</span></p>
+                  <h3 class="font-display mt-4 text-xl">Project details coming soon</h3>
+                  <p class="mt-2 text-xs leading-6 text-slate-400">Add a title, short description, and tools used when ready.</p>
+                </div>
+              </article>
+
+              <article class="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
+                <div class="project-art project-database h-56"><span class="project-shape"></span></div>
+                <div class="p-5">
+                  <p class="font-mono flex justify-between text-[10px] text-[#f4a17e]"><span>DATABASE SYSTEMS</span><span>PROJECT 02</span></p>
+                  <h3 class="font-display mt-4 text-xl">Project details coming soon</h3>
+                  <p class="mt-2 text-xs leading-6 text-slate-400">Add a title, short description, and tools used when ready.</p>
+                </div>
+              </article>
+
+              <article class="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02]">
+                <div class="project-art project-web h-56"><span class="project-shape"></span></div>
+                <div class="p-5">
+                  <p class="font-mono flex justify-between text-[10px] text-slate-300"><span>WEB TECHNOLOGIES</span><span>PROJECT 03</span></p>
+                  <h3 class="font-display mt-4 text-xl">Project details coming soon</h3>
+                  <p class="mt-2 text-xs leading-6 text-slate-400">Add a title, short description, and tools used when ready.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" class="border-t border-white/10 py-20 md:py-28">
+          <div class="mx-auto max-w-6xl px-5">
+            <div class="grid gap-4 md:grid-cols-[180px_1fr]">
+              <p class="font-mono pt-2 text-xs text-[#f4a17e]">04 / RESUME & CONVERSATION</p>
+              <div>
+                <h2 class="font-display text-4xl font-medium tracking-tight md:text-6xl">Resume / Let’s talk.</h2>
+                <p class="mt-5 max-w-xl text-sm leading-7 text-slate-400">
+                  Resume and profile links can be added here later.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-12 grid gap-4 md:grid-cols-2">
+              <article id="resume" class="flex min-h-52 items-center justify-between gap-6 rounded-2xl border border-blue-300/25 bg-gradient-to-r from-blue-900/20 via-white/[0.02] to-orange-300/10 p-7">
+                <div>
+                  <p class="font-mono text-[10px] text-[#f4a17e]">THE SHORT VERSION</p>
+                  <h3 class="font-display mt-3 text-2xl">Resume coming soon</h3>
+                  <p class="mt-2 text-sm text-slate-400">The resume file will be added here when it’s ready.</p>
+                </div>
+                <span class="font-mono text-4xl text-blue-300/60">/cv</span>
+              </article>
+
+              <article class="min-h-52 rounded-2xl border border-orange-200/20 bg-gradient-to-r from-blue-900/10 to-orange-300/10 p-7">
+                <p class="font-mono text-[10px] text-[#f4a17e]">OPEN TO A GOOD CONVERSATION</p>
+                <h3 class="font-display mt-3 text-2xl">Let’s talk.</h3>
+                <p class="mt-2 text-sm text-slate-400">LinkedIn and GitHub links will be added here later.</p>
+                <div class="mt-5 flex flex-wrap gap-2 text-xs">
+                  <span class="rounded-lg border border-white/10 px-3 py-2 text-slate-300">LinkedIn · Link coming soon</span>
+                  <span class="rounded-lg border border-white/10 px-3 py-2 text-slate-300">GitHub · Link coming soon</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="mx-auto flex max-w-6xl flex-col justify-between gap-3 border-t border-white/10 px-5 py-6 font-mono text-[10px] text-slate-500 sm:flex-row">
+        <span>© 2026 Sue Kim</span>
+        <span>Curiosity is a good starting point.</span>
+        <a class="hover:text-blue-300" href="#home">Back to top ↑</a>
+      </footer>
+    </div>
+
+    <script>
+      const menuButton = document.getElementById("menu-button");
+      const siteNav = document.getElementById("site-nav");
+
+      menuButton.addEventListener("click", () => {
+        const open = menuButton.getAttribute("aria-expanded") === "true";
+        menuButton.setAttribute("aria-expanded", String(!open));
+        menuButton.setAttribute("aria-label", open ? "Open navigation menu" : "Close navigation menu");
+        siteNav.classList.toggle("hidden", open);
+        siteNav.classList.toggle("flex", !open);
+      });
+
+      siteNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuButton.setAttribute("aria-expanded", "false");
+          menuButton.setAttribute("aria-label", "Open navigation menu");
+          siteNav.classList.add("hidden");
+          siteNav.classList.remove("flex");
+        });
+      });
+    </script>
+  </body>
+</html>
